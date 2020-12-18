@@ -49,7 +49,7 @@ public class MainViewController implements Initializable {
 	public void initialize(URL uri, ResourceBundle rb) {
 	}
 	
-	//metodo necessario para carregar as diversas vbox que serão carregadas durante a execução do programa 
+	//metodo necessario para carregar as diversas vbox que serão usadas durante a execução do programa 
 	private  synchronized <T> void loadView(String absoluteName, Consumer<T> initializeAction) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
@@ -63,6 +63,8 @@ public class MainViewController implements Initializable {
 			mainVbox.getChildren().add(maindMenu);
 			mainVbox.getChildren().addAll(newVbox.getChildren());
 			
+			//loadview passa a ser  um metodo com parametrização generica tornando mais flexivel 
+			//linhas que inicializam o controlador da expressão lambda envida como argumento
 			T controller = loader.getController();
 			initializeAction.accept(controller);
 	}
